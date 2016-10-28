@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="container">
+    <swiper class="swiper" duration="{{duration}}" bindchange="intervalChange">
+        <swiper-item  bindtap="tapImgItem" wx:for="{{imgUrls}}" wx:key="*this" class="slide-image" style='background-image: url({{item}});'>
+        </swiper-item>
+    </swiper>
+    
+    <view class="countdown-wrap">
+        <view class=""></view>
+    </view>
+
+    <view class="thinkNote-wrap">
+        <view class="thinkNote-contant">
+            <text class="title">冥想笔记</text>
+            <textarea class="thinkNote"></textarea>
+        </view>
+    </view>
+
+    <view bindtap="bindViewTap" class="userinfo" style="background-image: url({{userInfo.avatarUrl}});">
+    </view>
+
+    <button class="btn-begin" bindtap="changeIndicatorDots"> 开始 </button>
+    <audio id="myAudio" action="{{action}}" src="{{src}}" loop></audio>
+</view>
