@@ -7,7 +7,15 @@
     </swiper>
     
     <view class="countdown-wrap">
-        <view class=""></view>
+        <view class="countdown">
+            <view class="top-ro item">
+                <view class="child"></view>
+            </view>
+            <view class="bottom-ro item">
+                <view class="child"></view>
+            </view>
+            <view class="bottom-cover"></view>
+        </view>
     </view>
 
     <view class="thinkNote-wrap" style="{{noteStyle}}">

@@ -18,6 +18,66 @@ page{
     background-size: cover;
 }
 
+.countdown-wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;   
+}
+.countdown-wrap .countdown{
+    position: relative;
+    width: 450rpx;
+    height: 450rpx;
+    margin: 300rpx auto; 
+    opacity: 0.8;
+}
+.countdown-wrap .countdown .item{
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+.countdown-wrap .countdown .item .child{
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 10rpx solid #09ba07;
+    border-radius: 50%;
+    z-index: 1;
+}
+.countdown-wrap .countdown .top-ro{
+    left: 0;
+}
+.countdown-wrap .countdown .top-ro .child{
+    left: 0;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    transform: rotate(-135deg);
+}
+.countdown-wrap .countdown .bottom-ro{
+    right: 0;
+}
+.countdown-wrap .countdown .bottom-ro .child{
+    right: 0;
+    border-left-color: transparent;
+    border-bottom-color: transparent;
+    transform: rotate(45deg);
+}
+.countdown-wrap .countdown .bottom-cover{
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: transparent;
+    bottom: 0;
+    z-index: 2;
+}
+
 .thinkNote-wrap{
     display: none;
     position: absolute;
@@ -48,7 +108,6 @@ page{
     font-weight: bold;
     color: #aaa;
 }
-
 .thinkNote-wrap .thinkNote{
     width: 400rpx;
     height: 250rpx;
@@ -82,16 +141,15 @@ page{
 }
 
 #myAudio{
-    /*display: none;*/
     position: absolute;
     visibility: hidden;
 }
 
 .userinfo {
   position: absolute;
-  width: 100rpx;
-  height: 100rpx;
-  bottom: 10rpx;
+  width: 80rpx;
+  height: 80rpx;
+  bottom: 15rpx;
   right: 10rpx;
   border-radius: 50%;
   margin:  15rpx;
