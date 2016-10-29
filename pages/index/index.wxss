@@ -13,17 +13,58 @@ page{
 .slide-image{
     width: 100%;
     height: 100%;
+    display: block;
     background-position: center;
     background-size: cover;
 }
 
 .thinkNote-wrap{
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+}
+.thinkNote-wrap .thinkNote-contant{
+    position: absolute;
+    top: 400rpx;
+    left: 50%;
+    margin-left: -250rpx;
+    width: 500rpx;
+    background-color: #fff;
+    border-radius: 10rpx;
+}
+.thinkNote-wrap .title{
+    display: inline-block;
+    width: 50%;
+    height: 70rpx;
+    line-height: 70rpx;
+    margin: 0 25%;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.thinkNote-wrap .thinkNote{
+    width: 400rpx;
+    height: 250rpx;
+    margin: 30rpx auto;
+    padding: 15rpx 20rpx;
+    border-radius: 15rpx;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    font-size: 35rpx;
+    color: #333;
+}
+.thinkNote-wrap .btn-save{
+    width: 150rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    margin: 20rpx auto;
 }
 
 .btn-begin{
@@ -34,12 +75,14 @@ page{
     margin-left: -140rpx;
     background-color: #09ba07;
     opacity: 0.7;
+    z-index: 2;
 }
 .button-hover {
     opacity: 1;
 }
 
-.audio{
+#myAudio{
+    /*display: none;*/
     position: absolute;
     visibility: hidden;
 }

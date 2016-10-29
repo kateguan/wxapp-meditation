@@ -1,7 +1,8 @@
 <!--index.wxml-->
 <view class="container">
     <swiper class="swiper" duration="{{duration}}" bindchange="intervalChange">
-        <swiper-item  bindtap="tapImgItem" wx:for="{{imgUrls}}" wx:key="*this" class="slide-image" style='background-image: url({{item}});'>
+        <swiper-item  bindtap="tapImgItem" wx:for="{{imgUrls}}" wx:key="*this">
+            <view class="slide-image" style='background-image: url({{item}});'></view>
         </swiper-item>
     </swiper>
     
@@ -9,10 +10,12 @@
         <view class=""></view>
     </view>
 
-    <view class="thinkNote-wrap">
+    <view class="thinkNote-wrap" style="{{noteStyle}}">
         <view class="thinkNote-contant">
             <text class="title">冥想笔记</text>
-            <textarea class="thinkNote"></textarea>
+            <textarea class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;' auto-focus='true'></textarea>
+
+            <button class="btn-save" bindtap="saveNote"> 保存 </button>
         </view>
     </view>
 
@@ -20,5 +23,5 @@
     </view>
 
     <button class="btn-begin" bindtap="changeIndicatorDots"> 开始 </button>
-    <audio id="myAudio" action="{{action}}" src="{{src}}" loop></audio>
+    <audio id="myAudio" src="{{src}}" loop="loop"></audio>
 </view>
