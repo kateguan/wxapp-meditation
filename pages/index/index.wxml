@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-    <swiper class="swiper" duration="{{duration}}" bindchange="intervalChange">
+    <swiper class="swiper {{event}}" duration="{{duration}}" bindchange="intervalChange">
         <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
             <view class="slide-image" style='background-image: url({{item}});'></view>
         </swiper-item>
