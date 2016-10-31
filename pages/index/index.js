@@ -2,8 +2,10 @@
 //获取应用实例
 var app = getApp();
 
-var imgIndex = 0,
-    playing = false,
+var playing = false,
+    setime = 10,
+    intervalfoo,
+    meditationDate,
     audioUrls = [
         'http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715',
         'https://dn-working-noise.qbox.me/noise/min/Ocean.mp3',
@@ -22,14 +24,24 @@ Page({
             'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD//gAPTGF2YzU2LjYwLjEwMP/bAEMAAwICAwICAwMDAwQDAwQFCAUFBAQFCgcHBggMCgwMCwoLCw0OEhANDhEOCwsQFhARExQVFRUMDxcYFhQYEhQVFP/bAEMBAwQEBQQFCQUFCRQNCw0UFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFP/AABEIACQAQAMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQgDBAYCCf/EAC0QAAAGAQIDBQkAAAAAAAAAAAABAgMEBREGEgcTMQgiIzJBITNCUVJhcZGh/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAUEAQP/xAAhEQACAQMDBQAAAAAAAAAAAAAAAwIBBBMFETMSIzEyUv/aAAwDAQACEQMRAD8A+X4AHQABv1tLPt3NkKM7IX9LaDUf8GeBXNrY5y1eb4Rbfsra/wBKcP5EBk4jFhbT17T3JLwiI/XIw3F3j44FRFnkp3CoVpp+wplkmdDdiKP2kTqDTn9iPF8e2LqXTvF+waar65mnmwD5RukkiQ8WOuSFNb/Sh07K1ud1fp8jHEXcGeTrNPmpeQ5gAAbyUAACAEiUs1RWkF3dueg910mbCkIfim4l1PlUnORqsy0N4yjI6Oh1hHrXPEjpWX3IZG1nD0gV1Y58jNjHI1dePtrZfeecbWeTJeRis7t6xi8t7dhCCItx5Enc61izvcxUtn+BzEq0TJzksDMvf4PVrIUptk6yPAD6gKhDAAAAAAAAAAAAAAA//9k='
         ],
         duration: 1000,
+        event: '',
         src: audioUrls[0],
         userInfo: {},
         noteStyle: [],
+        topRotate: 0,
+        bottomRotate: 0,
+        timedata: '',
+        btnBeginVal: {
+            type: '',
+            text: '开始'
+        },
+        vv: '',
     },
 
     onLoad: function () {
         this.setData({
-            userInfo: app.globalData.userInfo
+            userInfo: app.globalData.userInfo,
+            timedata: (setime < 10 ? '0' + setime : setime) + ":00"
         })
 
     },
@@ -40,34 +52,54 @@ Page({
     },
 
     intervalChange: function(e) {
-        imgIndex = e.detail.current;
-        
-        this.audioCtx.pause();
-        playing = false;
 
-        this.setData({
-            src: audioUrls[imgIndex],
-        });
-    },
-
-    tapImgItem: function () {
-        if ( playing ) {
-            this.audioCtx.pause();
-            playing = false;
-        }
-    },
-
-    changeIndicatorDots: function(e) {
         if ( playing ) {
             return;
         }
 
+        this.audioCtx.pause();
+        playing = false;
+
+        clearInterval(intervalfoo);
+
         this.setData({
-            src: audioUrls[imgIndex],
+            src: audioUrls[e.detail.current],
+            timedata: (setime < 10 ? '0' + setime : setime) + ":00",
+            btnBeginVal: {
+                type: '',
+                text: '开始'
+            },
         });
+    },
+
+    beginFoo: function(e) {
+
+        if ( playing ) {
+
+            clearInterval(intervalfoo);
+
+            this.audioCtx.pause();
+            playing = false;
+
+            this.setData({
+                event: '',
+                noteStyle: 'display:block',
+            })
+
+            return;
+        }
 
         this.audioCtx.play();
+        this.setData({
+            event: 'event',
+            btnBeginVal: {
+                type: 'over',
+                text: '结束'
+            },
+        })
         playing = true;
+
+        this.timeUpdate();
     },
 
     bindViewTap: function () {
@@ -76,10 +108,69 @@ Page({
       })
     },
 
-    saveNote: function () {
+    bindTextAreaBlur: function (e) {
+        console.log('bindblur');
         this.setData({
-            noteStyle: 'display:none'
+            vv: e.detail.value
         })
+    },
+
+    timeUpdate: function () {
+        var that = this;
+        var time =  new Date(0);
+        time.setMinutes(setime);
+        intervalfoo = setInterval(function () {
+            time =  new Date(time.getTime() - 1000);
+            var min = parseInt(time.getMinutes());
+            var sec = parseInt(time.getSeconds());
+            var Ntime = (min < 10 ? '0' + min : min)  + ':' + (sec < 10 ? '0' + sec : sec);
+            that.setData({
+                timedata: Ntime
+            });
+            if ( min === 0 && sec === 0 ) {
+                clearInterval(intervalfoo);
+                that.setData({
+                    noteStyle: 'display:block'
+                })
+            }
+        },1000)
+    },
+
+    saveNote: function () {
+        var that = this;
+
+        setTimeout(function () {
+
+            console.log( 'saveNote + ' + that.data.vv );
+
+            meditationDate = [{
+                date: new Date().getTime(),
+                duration: that.data.timedata,
+                text: that.data.vv
+            }];
+
+            var oldData = wx.getStorageSync('meditationDate') || [];
+
+            var newData = oldData.concat(meditationDate);
+
+            wx.setStorage({
+                key: 'meditationDate',
+                data: newData,
+            })
+
+            that.setData({
+                noteStyle: 'display:none',
+                timedata: (setime < 10 ? '0' + setime : setime) + ":00",
+                btnBeginVal: {
+                    type: '',
+                    text: '开始'
+                },
+                vv: '',
+            });
+
+        },0)
+
+
     },
 
 })

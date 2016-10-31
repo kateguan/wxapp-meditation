@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
     <swiper class="swiper" duration="{{duration}}" bindchange="intervalChange">
-        <swiper-item  bindtap="tapImgItem" wx:for="{{imgUrls}}" wx:key="*this">
+        <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
             <view class="slide-image" style='background-image: url({{item}});'></view>
         </swiper-item>
     </swiper>
@@ -9,19 +9,22 @@
     <view class="countdown-wrap">
         <view class="countdown">
             <view class="top-ro item">
-                <view class="child"></view>
+                <view class="child" style="transform: rotate({{topRotate-135}}deg);"></view>
             </view>
             <view class="bottom-ro item">
-                <view class="child"></view>
+                <view class="child" style="transform: rotate({{bottomRotate+45}}deg);"></view>
             </view>
             <view class="bottom-cover"></view>
+        </view>
+        <view class="time-text">
+            {{timedata}}
         </view>
     </view>
 
     <view class="thinkNote-wrap" style="{{noteStyle}}">
         <view class="thinkNote-contant">
             <text class="title">冥想笔记</text>
-            <textarea class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;' auto-focus='true'></textarea>
+            <textarea bindblur="bindTextAreaBlur" value="{{vv}}" class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;' auto-focus='true'></textarea>
 
             <button class="btn-save" bindtap="saveNote"> 保存 </button>
         </view>
@@ -30,6 +33,6 @@
     <view bindtap="bindViewTap" class="userinfo" style="background-image: url({{userInfo.avatarUrl}});">
     </view>
 
-    <button class="btn-begin" bindtap="changeIndicatorDots"> 开始 </button>
+    <button class="btn-begin {{btnBeginVal.type}}" bindtap="beginFoo"> {{btnBeginVal.text}} </button>
     <audio id="myAudio" src="{{src}}" loop="loop"></audio>
 </view>
