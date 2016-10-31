@@ -27,7 +27,7 @@ Page({
         event: '',
         src: audioUrls[0],
         userInfo: {},
-        noteStyle: [],
+        noteStyle: 'display:none',
         topRotate: 0,
         bottomRotate: 0,
         timedata: '',
@@ -170,7 +170,12 @@ Page({
 
         },0)
 
+    },
 
+    btnCancelNote: function () {
+        this.setData({
+            noteStyle: 'display:none',
+        })  
     },
 
 })

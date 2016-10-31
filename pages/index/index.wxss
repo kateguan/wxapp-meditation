@@ -130,6 +130,11 @@ page{
     font-size: 35rpx;
     color: #333;
 }
+.thinkNote-wrap .btn-cancel{
+    position: absolute;
+    top: 10rpx;
+    right: 10rpx;
+}
 .thinkNote-wrap .btn-save{
     width: 150rpx;
     height: 60rpx;

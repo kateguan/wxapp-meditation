@@ -26,7 +26,9 @@
             <text class="title">冥想笔记</text>
             <textarea bindblur="bindTextAreaBlur" value="{{vv}}" class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;' auto-focus='true'></textarea>
 
-            <button class="btn-save" bindtap="saveNote"> 保存 </button>
+            <button class="btn-save btn" bindtap="saveNote"> 保存 </button>
+
+            <icon class="btn-cancel" type="clear" size="25" bindtap="btnCancelNote"></icon>
         </view>
     </view>
 
