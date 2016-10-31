@@ -35,7 +35,7 @@ Page({
             type: '',
             text: '开始'
         },
-        vv: '',
+        areaVal: '',
     },
 
     onLoad: function () {
@@ -111,7 +111,7 @@ Page({
     bindTextAreaBlur: function (e) {
         console.log('bindblur');
         this.setData({
-            vv: e.detail.value
+            areaVal: e.detail.value
         })
     },
 
@@ -141,12 +141,12 @@ Page({
 
         setTimeout(function () {
 
-            console.log( 'saveNote + ' + that.data.vv );
+            console.log( 'saveNote + ' + that.data.areaVal );
 
             meditationDate = [{
                 date: new Date().getTime(),
                 duration: that.data.timedata,
-                text: that.data.vv
+                text: that.data.areaVal
             }];
 
             var oldData = wx.getStorageSync('meditationDate') || [];
@@ -165,7 +165,7 @@ Page({
                     type: '',
                     text: '开始'
                 },
-                vv: '',
+                areaVal: '',
             });
 
         },0)
