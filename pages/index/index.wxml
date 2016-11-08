@@ -7,16 +7,6 @@
     </swiper>
     
     <view class="countdown-wrap">
-<!--         <view class="countdown">
-            <view class="top-ro item">
-                <view class="child" style="transform: rotate({{topRotate-135}}deg);"></view>
-            </view>
-            <view class="bottom-ro item">
-                <view class="child" style="transform: rotate({{bottomRotate+45}}deg);"></view>
-            </view>
-            <view class="bottom-cover"></view>
-        </view> -->
-
         <view class="audioStyle {{audioStyle.cls}}">
             {{audioStyle.val}}
         </view>
