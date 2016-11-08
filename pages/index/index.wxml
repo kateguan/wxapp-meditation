@@ -1,13 +1,13 @@
 <!--index.wxml-->
-<view class="container">
-    <swiper class="swiper {{event}}" duration="{{duration}}" bindchange="intervalChange">
+<view class="container" bingtap="pullReturn">
+    <swiper class="swiper {{swipeAnswer}}" duration="{{duration}}" bindchange="swiperChange">
         <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
             <view class="slide-image" style='background-image: url({{item}});'></view>
         </swiper-item>
     </swiper>
     
     <view class="countdown-wrap">
-        <view class="countdown">
+<!--         <view class="countdown">
             <view class="top-ro item">
                 <view class="child" style="transform: rotate({{topRotate-135}}deg);"></view>
             </view>
@@ -15,16 +15,24 @@
                 <view class="child" style="transform: rotate({{bottomRotate+45}}deg);"></view>
             </view>
             <view class="bottom-cover"></view>
+        </view> -->
+
+        <view class="audioStyle {{audioStyle.cls}}">
+            {{audioStyle.val}}
         </view>
-        <view class="time-text">
-            {{timedata}}
+
+        <view class="time-text {{countTime.display}}">
+            <text class="lg-font">{{countTime.min}}</text> 
+            <text class="little-font">分</text> 
+            <text class="lg-font">{{countTime.sec}}</text>
+            <text class="little-font">秒</text>
         </view>
     </view>
 
     <view class="thinkNote-wrap" style="{{noteStyle}}">
         <view class="thinkNote-contant">
             <text class="title">冥想笔记</text>
-            <textarea bindblur="bindTextAreaBlur" value="{{vv}}" class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;' auto-focus='true'></textarea>
+            <textarea bindblur="bindTextAreaBlur" value="{{vv}}" class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;'></textarea>
 
             <button class="btn-save btn" bindtap="saveNote"> 保存 </button>
 
@@ -32,9 +40,18 @@
         </view>
     </view>
 
-    <view bindtap="bindViewTap" class="userinfo" style="background-image: url({{userInfo.avatarUrl}});">
+    <view class="btn-wrap">
+        <view class="begin">
+            <view class="btn-begin {{btnBegin.cls}}" bindtap="beginFun"> {{btnBegin.val}} </view>
+        </view>
+        <view class="btn-finish" bindtap="finishFun">
+            
+        </view>
     </view>
 
-    <button class="btn-begin {{btnBeginVal.type}}" bindtap="beginFoo"> {{btnBeginVal.text}} </button>
-    <audio id="myAudio" src="{{src}}" loop="loop"></audio>
+
+    <view bindtap="goInfoPage" class="userinfo" style="background-image: url({{userInfo.avatarUrl}});">
+    </view>
+
+    <audio id="myAudio" src="{{audioSrc}}" loop="loop"></audio>
 </view>
