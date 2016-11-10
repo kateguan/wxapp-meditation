@@ -28,7 +28,7 @@
 
             <view class="btn-save btn" bindtap="saveNote"> 保存 </view>
 
-            <icon class="btn-cancel" type="clear" size="25" bindtap="btnCancelNote"></icon>
+            <!-- <icon class="btn-cancel" type="clear" size="25" bindtap="btnCancelNote"></icon> -->
         </view>
     </view>
 

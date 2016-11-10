@@ -215,7 +215,7 @@ Page({
 
         //时间短于1min不保存
         if ( (meditationTime - _that.data.countTime.min) < 2 ) {
-            noteStyle = '';
+            // noteStyle = '';
         }
 
         if ( playing ) {
@@ -349,16 +349,16 @@ Page({
         },800)
     },
 
-    btnCancelNote: function () {
-        this.setData({
-            noteStyle: '',
-            btnBegin: {
-                cls: '',
-                val: '开始'
-            },
-            areaVal: '',
-        })  
-    },
+    // btnCancelNote: function () {
+    //     this.setData({
+    //         noteStyle: '',
+    //         btnBegin: {
+    //             cls: '',
+    //             val: '开始'
+    //         },
+    //         areaVal: '',
+    //     })  
+    // },
 
     goInfoPage: function () {
       wx.navigateTo({
