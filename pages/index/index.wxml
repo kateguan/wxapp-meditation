@@ -22,7 +22,7 @@
     <view class="thinkNote-wrap" style="{{noteStyle}}">
         <view class="thinkNote-contant">
             <text class="title">冥想笔记</text>
-            <textarea bindblur="bindTextAreaBlur" value="{{vv}}" class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;'></textarea>
+            <textarea bindblur="bindTextAreaBlur" value="{{areaVal}}" class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;'></textarea>
 
             <button class="btn-save btn" bindtap="saveNote"> 保存 </button>
 

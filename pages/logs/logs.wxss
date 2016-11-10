@@ -75,6 +75,7 @@ page{
     text-align: center;
 }
 
+
 .log-box .line{
     border-right:1px solid #d7d7d7;
     width: 1px;

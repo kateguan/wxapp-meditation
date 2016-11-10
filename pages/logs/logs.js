@@ -1,6 +1,6 @@
 //logs.js
 var app = getApp(),
-    judgeDate;
+    judgeDate = [];
 
 Page({
   data: {
@@ -16,56 +16,91 @@ Page({
       userInfo: app.globalData.userInfo
     })
   },
+  onUnload: function() {
+    judgeDate = [];
+    console.log('page unload');
+  },
   setDate: function () {
     var _that = this;
 
     wx.getStorage({
       key: 'meditationDate',
+
       success: function(res) {
         console.log(res.data);
-        for(var i = 0 ; i<res.data.length ; i++){
-          var oldDate = new Date(res.data[i].date);
-          if(i<res.data.length-1)
-          {
-            var nextDate = new Date(res.data[i+1].date);
-            console.log('next:'+ nextDate);
+        var nextDate = null,
+            newDate,
+            currentDate,
+            newDuration = 0,
+            firstDay = false,
+            newText;
+
+        for(var i = res.data.length-1 ; i>=0 ; i--){
+
+          currentDate = new Date(res.data[i].date);
+
+          if(i == 0){
+            firstDay = true;
           }
-          console.log('old'+ oldDate);
-          var year = oldDate.getFullYear();
-          var month = oldDate.getMonth()+1;
-          var day = oldDate.getDate();
-          var newDate = year+'.'+month+'.'+day;
-          console.log('newDate:'+ res.data[i].date );
+
+          if(i>0)
+          {
+            nextDate = new Date(res.data[i-1].date);
+          }
+          else{
+            nextDate = null;
+          }
+
+          var year = currentDate.getFullYear();
+
+          var month = currentDate.getMonth()+1;
+
+          var day = currentDate.getDate();
 
           var dateFlag = true;
 
-          /*if(nextDate.getMonth() == oldDate.getMonth()){
-            if(nextDate.getDay() - oldDate.getDay() >1){
-              dateFlag = false;
+          newDate = year+'.'+month+'.'+day;
+
+          newText = res.data[i].text;
+
+          newDuration = 10-(res.data[i].duration);
+
+          if(nextDate){
+
+            if(nextDate.getMonth() == currentDate.getMonth()){
+
+              if(currentDate.getDate() - nextDate.getDate() >1){
+
+                dateFlag = false;
+
+              }
+
+              else{
+
+                dateFlag = true;
+
+              }
             }
             else{
-              dateFlag = true;
+
+              dateFlag = false;
+
             }
-          }*/
-          judgeDate = [{
+          }
+
+          judgeDate.push({
+            firstDay : firstDay,
             dateFlag : dateFlag,
-            newDate : newDate
-          }];
-          console.log('dateFlag:'+ dateFlag);
-          var oldFLag = wx.getStorageSync('judgeDate') || [];
-
-          var newFLag = oldFLag.concat(judgeDate);
-
-          wx.setStorage({
-            key: 'judgeDate',
-            data: newFLag
-          })
+            newDate : newDate,
+            newDuration : newDuration,
+            newText : newText
+          });
         }
-
         _that.setData({
           history:res.data,
           judgeDate :judgeDate
-        })
+        });
+
       }
 
     })
