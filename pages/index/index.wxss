@@ -10,7 +10,7 @@ page{
     width: 100%;
     height: 100%;
 }
-.swiper.event{
+.swiper.false{
     pointer-events: none;   
 }
 .slide-image{
@@ -30,62 +30,40 @@ page{
     z-index: 5;
     pointer-events: none;   
 }
-.countdown-wrap .countdown{
-    position: relative;
-    width: 450rpx;
-    height: 450rpx;
-    margin: 300rpx auto 0; 
-    opacity: 0.8;
-}
-.countdown-wrap .countdown .item{
-    position: absolute;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-}
-.countdown-wrap .countdown .item .child{
-    position: absolute;
-    top: 0;
-    width: 200%;
-    height: 100%;
-    box-sizing: border-box;
-    border: 12rpx solid #ddd;
-    border-radius: 50%;
-    z-index: 1;
-}
-.countdown-wrap .countdown .top-ro{
-    left: 0;
-}
-.countdown-wrap .countdown .top-ro .child{
-    left: 0;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
-    transform: rotate(-135deg);
-}
-.countdown-wrap .countdown .bottom-ro{
-    right: 0;
-}
-.countdown-wrap .countdown .bottom-ro .child{
-    right: 0;
-    border-left-color: transparent;
-    border-bottom-color: transparent;
-    transform: rotate(45deg);
-}
-.countdown-wrap .countdown .bottom-cover{
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    background-color: transparent;
-    bottom: 0;
-    z-index: 2;
-}
-.time-text{
-    width: 100%;
-    margin-top: -290rpx;
-    font-size: 120rpx;
+.countdown-wrap .audioStyle{
+    margin-top: 250rpx;
+    line-height: 100rpx;
+    font-size: 100rpx;
+    color: #fff;
     text-align: center;
-    color: #ddd;
+}
+.countdown-wrap .audioStyle.top{
+    margin-top: 100rpx;
+    font-size: 80rpx;
+    transition: .8s;
+}
+.countdown-wrap .time-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 140rpx;
+    margin-top: 270rpx;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+}
+.countdown-wrap .time-text.flex{
+    opacity: 1;
+    transition: 1.5s;
+}
+.countdown-wrap .time-text .lg-font{
+    margin: 0 10rpx 0 30rpx;
+    font-size: 110rpx;
+    font-weight: bold;
+}
+.countdown-wrap .time-text .little-font{
+    font-size: 40rpx;
 }
 
 .thinkNote-wrap{
@@ -142,22 +120,60 @@ page{
     margin: 20rpx auto;
 }
 
-.btn-begin{
+.btn-wrap .begin{
     position: absolute;
+    width: 100%;
+    height: 150rpx;
     bottom: 10%;
-    left: 50%;
-    width: 280rpx;
-    margin-left: -140rpx;
-    background-color: #09ba07;
-    opacity: 0.7;
-    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-wrap .btn-begin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*position: absolute;*/
+    /*bottom: 10%;*/
+    /*left: 50%;*/
+    width: 150rpx;
+    height: 150rpx;
+    /*transform: translateX(-50%);*/
+    border-radius: 50%;
+    border: 2rpx solid #fff;
+    font-size: 40rpx;
     color: #fff;
+    z-index: 2;
 }
-.btn-begin.over{
-    background-color: #fe0000;
+.btn-wrap .btn-begin.active{
+    animation: btnBegin 1s .1s;
+    animation-fill-mode: both;
 }
-.button-hover {
-    opacity: 1;
+@keyframes btnBegin{
+    0% {
+        width: 160rpx;
+        height: 160rpx;
+        font-size: 30rpx;
+    }
+    10% {
+        width: 150rpx;
+        height: 150rpx;
+    }
+    100% {
+        width: 90rpx;
+        height: 90rpx;
+        font-size: 30rpx;
+    }
+}
+.btn-wrap .btn-finish{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: rgba(255,255,255,0.4);
 }
 
 #myAudio{

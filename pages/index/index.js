@@ -3,16 +3,16 @@
 var app = getApp();
 
 var playing = false,
-    setime = 10,
-    intervalfoo,
+    intervalTimers,
     meditationDate,
-    audioUrls = [
-        'http://cdn.calm.com/scenes/scene-Qqkzy9k7Eo.m4a?v=1418162240715',
-        'https://dn-working-noise.qbox.me/noise/min/Ocean.mp3',
-        'https://dn-working-noise.qbox.me/noise/min/Forest.mp3',
-        'https://dn-working-noise.qbox.me/noise/min/Rain.mp3',
-        'https://dn-working-noise.qbox.me/noise/min/CoffeeShop.mp3',
-    ];
+    audioStyleVal = ["溪","浪","林","雨","噪",],
+    audioList = {
+        mountain: 'https://dn-working-noise.qbox.me/noise/min/JapaneseGarden.mp3',
+        Ocean: 'https://dn-working-noise.qbox.me/noise/min/Ocean.mp3',
+        Forest: 'https://dn-working-noise.qbox.me/noise/min/Forest.mp3',
+        Rain: 'https://dn-working-noise.qbox.me/noise/min/Rain.mp3',
+        CoffeeShop: 'https://dn-working-noise.qbox.me/noise/min/CoffeeShop.mp3',
+    };
 
 Page({
     data: {
@@ -23,86 +23,137 @@ Page({
             'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD//gAPTGF2YzU2LjYwLjEwMP/bAEMAAwICAwICAwMDAwQDAwQFCAUFBAQFCgcHBggMCgwMCwoLCw0OEhANDhEOCwsQFhARExQVFRUMDxcYFhQYEhQVFP/bAEMBAwQEBQQFCQUFCRQNCw0UFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFP/AABEIACQAQAMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAEBQAGAwcIAQL/xAAtEAABAwMCBQMDBQEAAAAAAAABAgMEAAURBhIHEyExUSJBYRQjcRUWMlKBof/EABkBAQEAAwEAAAAAAAAAAAAAAAMAAQQFAv/EABsRAQEAAwADAAAAAAAAAAAAAAADARETIzEy/9oADAMBAAIRAxEAPwDjfXnDCZp1KpRb5MN1wpZbWcmqvYrtO0veEN42KI2kjqoA+K7Kf4fN8VlNMOSERVR8qSt44Sn5rl7iTpePpbV62or6prbThQqSoYS4od8fFajkTr0Ita2V4XISUIcWiQnegr6rJ96RRLLIeSHXPQjOCpVXBDkt7UcSXJYcRGSAPSCRt81adYcNXnIUJy1vGeJfrQ1HGSfyPNR94ayQlqCgtFlLildd4pxpWFi4crll1p0jcyOmSe1MU2VfM5Mu0vRxHTsWeygfJrd/BPg+m9iO+wUPvk4SFePJ/FTzSikW2zhrVrUQRSgNI2qQrqBnuDTL9kufXyn3Wy1GZ6oCfc1vVfCCfpjVyru7FE2EFDnKb6pJHzT/AFTpC3XCW1cH3P0q0TkHljHUEfFXNz+iqaelsssOKeUUK7Y80t1bwjia8kxpbqkR4bSTtabGOvk1nkSmXGQWEDf/AFpzC1CtERDTicp2/wAU0VPYQnDzSNusGkLzZ7tFizVLJEV91IK0p8CjuHVmhaJJdeT9ttSi2vaCUg+KDubz8cJdUypoKG5GfcVngu/XxvvSEtJ8qpWd5a115e4StQXadHil5YQdwWnCTRnC3WrJUhuMhUGSoZU2noP8ovX1uVLioZhttqUpX3FgY3CgrNp5u2liRsw4gYSsD/hozb8bcM3Wtwat5tzSuTGeT60Zzn5oPU2pBLsFqgSWcrjHKFE5BHjFUuLKkyFnOXAn38U0Zk2d+1SW3S6ueMFo56DzWyAmkrLEdtxHRVAxLi+ZavXUqUaOZNwkS2wh1wqSBgCvJDYZ+k25wruKlSsUTNJjNvRX3VDCkEYA7V9OTFG2NNbEbU9R6eualSqnwix1xTbo2HZu74oEnlS1bfepUpZJ/9k=',
             'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD//gAPTGF2YzU2LjYwLjEwMP/bAEMAAwICAwICAwMDAwQDAwQFCAUFBAQFCgcHBggMCgwMCwoLCw0OEhANDhEOCwsQFhARExQVFRUMDxcYFhQYEhQVFP/bAEMBAwQEBQQFCQUFCRQNCw0UFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFP/AABEIACQAQAMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQgDBAYCCf/EAC0QAAAGAQIDBQkAAAAAAAAAAAABAgMEBREGEgcTMQgiIzJBITNCUVJhcZGh/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAUEAQP/xAAhEQACAQMDBQAAAAAAAAAAAAAAAwIBBBMFETMSIzEyUv/aAAwDAQACEQMRAD8A+X4AHQABv1tLPt3NkKM7IX9LaDUf8GeBXNrY5y1eb4Rbfsra/wBKcP5EBk4jFhbT17T3JLwiI/XIw3F3j44FRFnkp3CoVpp+wplkmdDdiKP2kTqDTn9iPF8e2LqXTvF+waar65mnmwD5RukkiQ8WOuSFNb/Sh07K1ud1fp8jHEXcGeTrNPmpeQ5gAAbyUAACAEiUs1RWkF3dueg910mbCkIfim4l1PlUnORqsy0N4yjI6Oh1hHrXPEjpWX3IZG1nD0gV1Y58jNjHI1dePtrZfeecbWeTJeRis7t6xi8t7dhCCItx5Enc61izvcxUtn+BzEq0TJzksDMvf4PVrIUptk6yPAD6gKhDAAAAAAAAAAAAAAA//9k='
         ],
-        duration: 1000,
-        event: '',
-        src: audioUrls[0],
+        duration: 800,
+        swipeAnswer: '',
+        audioSrc: audioList['mountain'],
+        audioStyle: {
+            cls: '',
+            val: audioStyleVal[0],
+        },
         userInfo: {},
         noteStyle: 'display:none',
-        topRotate: 0,
-        bottomRotate: 0,
-        timedata: '',
-        btnBeginVal: {
-            type: '',
-            text: '开始'
+        countTime: {
+            display: '',
+            min: '10',
+            sec: '00'
+        },
+        btnBegin: {
+            cls: '',
+            val: '开始'
         },
         areaVal: '',
     },
 
     onLoad: function () {
-        this.setData({
-            userInfo: app.globalData.userInfo,
-            timedata: (setime < 10 ? '0' + setime : setime) + ":00"
+        var _that = this;
+        app.getUserInfo(function () {
+            _that.setData({
+                userInfo: app.globalData.userInfo,
+            })
         })
-
     },
 
     onReady: function (e) {
-        // 使用 wx.createAudioContext 获取 audio 上下文 context
         this.audioCtx = wx.createAudioContext('myAudio')
     },
 
-    intervalChange: function(e) {
+    pullReturn: function (e) {
+        console.log("1");
+        return false;  
+    },
 
+    //下载
+    downloadAudio: function (index) {
+        //获取本地文件
+        wx.getSavedFileList({
+            success: function (res) {
+                console.log(res);   
+            }
+        })
+
+        for (variable in object) {
+            // statement
+        }
+
+        //下载音乐保存本地；
+        wx.downloadFile({
+            url: audioUrls[index],
+            success: function (res) {
+                //保存
+                wx.saveFile({
+                    tempFilePath: res.tempFilePath,
+                    success: function (res) {
+                        //记录
+                        var oldData = wx.getStorageSync('audioData') || {};
+                        oldData[Object.keys(audioList)[index]] = res.savedFilePath;
+                        wx.setStorage({
+                            key: 'audioData',
+                            data: oldData,
+                        })
+                    }
+                })
+            }
+        })
+    },
+
+    swiperChange: function(e) {
+        var index = e.detail.current,
+            _that = this;
         if ( playing ) {
             return;
         }
-
         this.audioCtx.pause();
         playing = false;
-
-        clearInterval(intervalfoo);
-
+        clearInterval(intervalTimers);
         this.setData({
-            src: audioUrls[e.detail.current],
-            timedata: (setime < 10 ? '0' + setime : setime) + ":00",
-            btnBeginVal: {
-                type: '',
-                text: '开始'
+            audioSrc: audioList[(Object.keys(audioList)[index])],
+            audioStyle: {
+                cls: _that.data.audioStyle.cls,
+                val: audioStyleVal[index]
+            },
+            btnBegin: {
+                cls: '',
+                val: '开始'
             },
         });
     },
 
-    beginFoo: function(e) {
-
+    beginFun: function(e) {
+        var _that = this;
         if ( playing ) {
-
-            clearInterval(intervalfoo);
-
-            this.audioCtx.pause();
+            clearInterval(intervalTimers);
+            _that.audioCtx.pause();
             playing = false;
-
-            this.setData({
-                event: '',
+            _that.setData({
+                swipeAnswer: '',
                 noteStyle: 'display:block',
             })
-
             return;
         }
 
-        this.audioCtx.play();
-        this.setData({
-            event: 'event',
-            btnBeginVal: {
-                type: 'over',
-                text: '结束'
+        _that.audioCtx.play();
+        _that.setData({
+            swipeAnswer: 'false',
+            btnBegin: {
+                cls: 'active',
+                val: '结束'
             },
+            countTime: {
+                display: 'flex',
+                min: _that.data.countTime.min,
+                sec: _that.data.countTime.sec
+            },
+            audioStyle: {
+                cls: 'top',
+                val: _that.data.audioStyle.val
+            }
         })
         playing = true;
-
+        //开始倒计时
         this.timeUpdate();
     },
 
-    bindViewTap: function () {
+    goInfoPage: function () {
       wx.navigateTo({
         url: '../logs/logs'
       })
@@ -116,20 +167,26 @@ Page({
     },
 
     timeUpdate: function () {
-        var that = this;
-        var time =  new Date(0);
-        time.setMinutes(setime);
-        intervalfoo = setInterval(function () {
-            time =  new Date(time.getTime() - 1000);
-            var min = parseInt(time.getMinutes());
-            var sec = parseInt(time.getSeconds());
-            var Ntime = (min < 10 ? '0' + min : min)  + ':' + (sec < 10 ? '0' + sec : sec);
-            that.setData({
-                timedata: Ntime
+        var _that = this,
+            min =  parseInt(_that.data.countTime.min),
+            sec =  parseInt(_that.data.countTime.sec);
+        intervalTimers = setInterval(function () {
+            if ( sec <= 0 ) {
+                sec = 59;
+                min--;
+            }else {
+                sec--;
+            }
+            _that.setData({
+                countTime: {
+                    display: _that.data.countTime.display,
+                    min: (min < 10 ? "0" + min : min),
+                    sec: (sec < 10 ? "0" + sec : sec)
+                }
             });
-            if ( min === 0 && sec === 0 ) {
-                clearInterval(intervalfoo);
-                that.setData({
+            if ( parseInt(min) === 0 && parseInt(sec) === 0 ) {
+                clearInterval(intervalTimers);
+                _that.setData({
                     noteStyle: 'display:block'
                 })
             }
@@ -137,45 +194,39 @@ Page({
     },
 
     saveNote: function () {
-        var that = this;
-
+        var _that = this;
         setTimeout(function () {
-
-            console.log( 'saveNote + ' + that.data.areaVal );
-
+            console.log( 'saveNote + ' + _that.data.areaVal );
             meditationDate = [{
                 date: new Date().getTime(),
-                duration: that.data.timedata,
-                text: that.data.areaVal
+                duration: _that.data.countTime.min,
+                text: _that.data.areaVal
             }];
-
             var oldData = wx.getStorageSync('meditationDate') || [];
-
             var newData = oldData.concat(meditationDate);
-
             wx.setStorage({
                 key: 'meditationDate',
                 data: newData
             })
-
-            that.setData({
+            _that.setData({
                 noteStyle: 'display:none',
-                timedata: (setime < 10 ? '0' + setime : setime) + ":00",
-                btnBeginVal: {
-                    type: '',
-                    text: '开始'
+                btnBegin: {
+                    cls: '',
+                    val: '开始'
                 },
                 areaVal: '',
             });
-
         },0)
-
     },
 
     btnCancelNote: function () {
         this.setData({
             noteStyle: 'display:none',
+            btnBegin: {
+                cls: '',
+                val: '开始'
+            },
+            areaVal: '',
         })  
     },
-
 })
