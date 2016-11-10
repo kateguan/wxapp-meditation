@@ -215,7 +215,7 @@ Page({
 
         //时间短于1min不保存
         if ( (meditationTime - _that.data.countTime.min) < 2 ) {
-            // noteStyle = '';
+            noteStyle = '';
         }
 
         if ( playing ) {
