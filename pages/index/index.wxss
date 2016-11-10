@@ -2,7 +2,6 @@
 page{
     width: 100%;
     height: 100%;
-    background-color: #000;
 }
 .container{
     height: 100%;
@@ -15,9 +14,9 @@ page{
     pointer-events: none;   
 }
 .slide-image{
-    display: block;
     width: 100%;
     height: 100%;
+    display: block;
     background-position: center;
     background-size: cover;
 }
@@ -37,11 +36,11 @@ page{
     font-size: 100rpx;
     color: #fff;
     text-align: center;
-    transition: .8s;
 }
 .countdown-wrap .audioStyle.top{
     margin-top: 100rpx;
     font-size: 80rpx;
+    transition: .8s;
 }
 .countdown-wrap .time-text{
     display: flex;
@@ -53,10 +52,10 @@ page{
     text-align: center;
     color: #fff;
     opacity: 0;
-    transition: 1.5s;
 }
 .countdown-wrap .time-text.flex{
     opacity: 1;
+    transition: 1.5s;
 }
 .countdown-wrap .time-text .lg-font{
     margin: 0 10rpx 0 30rpx;
@@ -77,54 +76,53 @@ page{
     background-color: rgba(0,0,0,0.5);
     z-index: 10;
     opacity: 0;
-    /*transition: 1s;*/
 }
 .thinkNote-wrap.block{
     display: block;
-    opacity: 1;
-    animation: showNote 1.2s;
+    animation: showNote 1.5s;
     animation-fill-mode: both;
 }
 @keyframes showNote{
     0%{
-        display: none;
+        /*display: none;*/
         opacity: 0;
     }
     1%{
-        display: block;
+        /*display: block;*/
     }
     100%{
-        display: block;
+        /*display: block;*/
         opacity: 1;
     }
 }
 .thinkNote-wrap .thinkNote-contant{
     position: absolute;
-    top: 300rpx;
+    top: 400rpx;
     left: 50%;
-    width: 500rpx;
-    overflow: hidden;
     margin-left: -250rpx;
+    width: 500rpx;
     background-color: #fff;
     border-radius: 10rpx;
 }
 .thinkNote-wrap .title{
     display: inline-block;
-    width: 70%;
+    width: 50%;
     height: 70rpx;
     line-height: 70rpx;
-    margin: 0 15%;
+    margin: 0 25%;
     border-bottom: 1px solid #ccc;
     text-align: center;
     font-weight: bold;
     color: #aaa;
 }
-.thinkNote-wrap textarea.thinkNote{
-    display: block;
-    width: 73%;
+.thinkNote-wrap .thinkNote{
+    width: 400rpx;
     height: 250rpx;
     margin: 30rpx auto;
-    padding: 15rpx 30rpx;
+    padding: 15rpx 20rpx;
+    border-radius: 15rpx;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
     line-height: 40rpx;
     font-size: 35rpx;
     color: #333;
@@ -135,13 +133,10 @@ page{
     right: 10rpx;
 }*/
 .thinkNote-wrap .btn-save{
-    width: 100%;
-    height: 80rpx;
-    line-height: 80rpx;
-    text-align: center;
-    border-top: 2rpx solid #ccc;
-    color: #9fdbf8;
-    margin-top: 10rpx;
+    width: 150rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    margin: 20rpx auto;
 }
 
 .btn-wrap .begin{
@@ -155,34 +150,35 @@ page{
 }
 .btn-wrap .btn-begin{
     display: flex;
-    box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    /*position: absolute;*/
+    /*bottom: 10%;*/
+    /*left: 50%;*/
     width: 150rpx;
     height: 150rpx;
+    /*transform: translateX(-50%);*/
     border-radius: 50%;
-    border: 3rpx solid #fff;
+    border: 2rpx solid #fff;
     font-size: 40rpx;
     color: #fff;
     z-index: 2;
     transition: .7s;
 }
 .btn-wrap .btn-begin.active{
-    /*animation: btnBegin 0.8s .1s;*/
-    /*animation-fill-mode: both;*/
-    width: 90rpx;
-    height: 90rpx;
-    font-size: 30rpx;
+    animation: btnBegin 1s .1s;
+    animation-fill-mode: both;
 }
 @keyframes btnBegin{
     0% {
+        width: 160rpx;
+        height: 160rpx;
+        font-size: 30rpx;
+    }
+    10% {
         width: 150rpx;
         height: 150rpx;
     }
-/*    10% {
-        width: 150rpx;
-        height: 150rpx;
-    }*/
     100% {
         width: 90rpx;
         height: 90rpx;

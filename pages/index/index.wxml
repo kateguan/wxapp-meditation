@@ -1,11 +1,9 @@
 <!--index.wxml-->
 <view class="container" bingtap="pullReturn">
     <swiper class="swiper {{swipeAnswer}}" duration="{{duration}}" bindchange="swiperChange">
-        <block  wx:for="{{imgUrls}}" wx:key="*this">
-            <swiper-item>
-                <view class="slide-image" style='background-image: url({{item}});'></view>
-            </swiper-item>
-        </block >
+        <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
+            <view class="slide-image" style='background-image: url({{item}});'></view>
+        </swiper-item>
     </swiper>
     
     <view class="countdown-wrap">
@@ -21,12 +19,13 @@
         </view>
     </view>
 
-    <view class="thinkNote-wrap {{noteStyle}}">
+    <view class="thinkNote-wrap" style="{{noteStyle}}">
         <view class="thinkNote-contant">
+
             <text class="title">今日专注{{noteTitle.min}}分<block wx:if="{{noteTitle.sec != 0}}">{{noteTitle.sec}}秒</block></text>
             <textarea bindblur="bindTextAreaBlur" value="{{areaVal}}" class="thinkNote" placeholder="有什么样的感想？" placeholder-style='color: #aaa;'></textarea>
 
-            <view class="btn-save btn" bindtap="saveNote"> 保存 </view>
+            <button class="btn-save btn" bindtap="saveNote"> 保存 </button>
 
             <!-- <icon class="btn-cancel" type="clear" size="25" bindtap="btnCancelNote"></icon> -->
         </view>
@@ -45,5 +44,5 @@
     <view bindtap="goInfoPage" class="userinfo" style="background-image: url({{userInfo.avatarUrl}});">
     </view>
 
-    <audio id="myAudio" src="{{audioSrc}}" action="{{audioAction}}" loop="loop"></audio>
+    <audio id="myAudio" src="{{audioSrc}}" loop="loop"></audio>
 </view>

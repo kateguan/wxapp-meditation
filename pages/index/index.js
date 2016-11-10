@@ -3,7 +3,6 @@
 var app = getApp();
 
 var playing = false,
-    meditationTime = 10,
     intervalTimers,
     meditationDate,
     audioStyleVal = ["溪","浪","林","雨","噪",],
@@ -24,21 +23,18 @@ Page({
             'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD//gAPTGF2YzU2LjYwLjEwMP/bAEMAAwICAwICAwMDAwQDAwQFCAUFBAQFCgcHBggMCgwMCwoLCw0OEhANDhEOCwsQFhARExQVFRUMDxcYFhQYEhQVFP/bAEMBAwQEBQQFCQUFCRQNCw0UFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFP/AABEIACQAQAMBIgACEQEDEQH/xAAcAAACAgMBAQAAAAAAAAAAAAAEBQAGAwcIAQL/xAAtEAABAwMCBQMDBQEAAAAAAAABAgMEAAURBhIHEyExUSJBYRQjcRUWMlKBof/EABkBAQEAAwEAAAAAAAAAAAAAAAMAAQQFAv/EABsRAQEAAwADAAAAAAAAAAAAAAADARETIzEy/9oADAMBAAIRAxEAPwDjfXnDCZp1KpRb5MN1wpZbWcmqvYrtO0veEN42KI2kjqoA+K7Kf4fN8VlNMOSERVR8qSt44Sn5rl7iTpePpbV62or6prbThQqSoYS4od8fFajkTr0Ita2V4XISUIcWiQnegr6rJ96RRLLIeSHXPQjOCpVXBDkt7UcSXJYcRGSAPSCRt81adYcNXnIUJy1vGeJfrQ1HGSfyPNR94ayQlqCgtFlLildd4pxpWFi4crll1p0jcyOmSe1MU2VfM5Mu0vRxHTsWeygfJrd/BPg+m9iO+wUPvk4SFePJ/FTzSikW2zhrVrUQRSgNI2qQrqBnuDTL9kufXyn3Wy1GZ6oCfc1vVfCCfpjVyru7FE2EFDnKb6pJHzT/AFTpC3XCW1cH3P0q0TkHljHUEfFXNz+iqaelsssOKeUUK7Y80t1bwjia8kxpbqkR4bSTtabGOvk1nkSmXGQWEDf/AFpzC1CtERDTicp2/wAU0VPYQnDzSNusGkLzZ7tFizVLJEV91IK0p8CjuHVmhaJJdeT9ttSi2vaCUg+KDubz8cJdUypoKG5GfcVngu/XxvvSEtJ8qpWd5a115e4StQXadHil5YQdwWnCTRnC3WrJUhuMhUGSoZU2noP8ovX1uVLioZhttqUpX3FgY3CgrNp5u2liRsw4gYSsD/hozb8bcM3Wtwat5tzSuTGeT60Zzn5oPU2pBLsFqgSWcrjHKFE5BHjFUuLKkyFnOXAn38U0Zk2d+1SW3S6ueMFo56DzWyAmkrLEdtxHRVAxLi+ZavXUqUaOZNwkS2wh1wqSBgCvJDYZ+k25wruKlSsUTNJjNvRX3VDCkEYA7V9OTFG2NNbEbU9R6eualSqnwix1xTbo2HZu74oEnlS1bfepUpZJ/9k=',
             'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD//gAPTGF2YzU2LjYwLjEwMP/bAEMAAwICAwICAwMDAwQDAwQFCAUFBAQFCgcHBggMCgwMCwoLCw0OEhANDhEOCwsQFhARExQVFRUMDxcYFhQYEhQVFP/bAEMBAwQEBQQFCQUFCRQNCw0UFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFP/AABEIACQAQAMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQgDBAYCCf/EAC0QAAAGAQIDBQkAAAAAAAAAAAABAgMEBREGEgcTMQgiIzJBITNCUVJhcZGh/8QAGAEBAQEBAQAAAAAAAAAAAAAAAAUEAQP/xAAhEQACAQMDBQAAAAAAAAAAAAAAAwIBBBMFETMSIzEyUv/aAAwDAQACEQMRAD8A+X4AHQABv1tLPt3NkKM7IX9LaDUf8GeBXNrY5y1eb4Rbfsra/wBKcP5EBk4jFhbT17T3JLwiI/XIw3F3j44FRFnkp3CoVpp+wplkmdDdiKP2kTqDTn9iPF8e2LqXTvF+waar65mnmwD5RukkiQ8WOuSFNb/Sh07K1ud1fp8jHEXcGeTrNPmpeQ5gAAbyUAACAEiUs1RWkF3dueg910mbCkIfim4l1PlUnORqsy0N4yjI6Oh1hHrXPEjpWX3IZG1nD0gV1Y58jNjHI1dePtrZfeecbWeTJeRis7t6xi8t7dhCCItx5Enc61izvcxUtn+BzEq0TJzksDMvf4PVrIUptk6yPAD6gKhDAAAAAAAAAAAAAAA//9k='
         ],
-        duration: 500,
+        duration: 800,
         swipeAnswer: '',
-        audioSrc: audioList[Object.keys(audioList)[0]],
+        audioSrc: audioList['mountain'],
         audioStyle: {
             cls: '',
             val: audioStyleVal[0],
         },
-        audioAction: {
-            method: 'pause',
-        },
         userInfo: {},
-        noteStyle: '',
+        noteStyle: 'display:none',
         countTime: {
             display: '',
-            min: meditationTime,
+            min: '10',
             sec: '00'
         },
         noteTitle: {
@@ -59,96 +55,49 @@ Page({
                 userInfo: app.globalData.userInfo,
             })
         })
-        this.downloadAudio();
     },
 
-    onReady: function () {
-        // this.audioCtx = wx.createAudioContext('myAudio')
+    onReady: function (e) {
+        this.audioCtx = wx.createAudioContext('myAudio')
     },
 
-    onPullDownRefresh: function () {
-        // console.log("11");
-        return false;  
-    },
-
-    onReachBottom: function () {
-        // console.log("22");
+    pullReturn: function (e) {
+        console.log("1");
         return false;  
     },
 
     //下载
     downloadAudio: function (index) {
-        var _that = this;
-        //获取本地文件路径
-        var audioPathList = wx.getStorageSync('audioPathList') || {};
+        //获取本地文件
         wx.getSavedFileList({
             success: function (res) {
-                var urlList = [];
-                var fileList = res.fileList;
-
-                console.log('__________localAudioList__________');
-                console.table(fileList);
-
-                for ( var i = 0; i < fileList.length; i++ ) {
-                    urlList.push( fileList[i].filePath )
-                }
-
-                for ( var key in audioList ) {
-                    if ( audioPathList[key] ) {
-                        var ox = urlList.indexOf(audioPathList[key])
-                        if ( ox == (-1) ) {
-                           downfil(key,audioList[key]);
-                        }else{
-                            //替换播放地址；
-                            replaceUrl(key,audioPathList[key]);
-                        }
-                    }else{
-                       downfil(key,audioList[key]);
-                    }
-                }
-
-                console.log("_________new audioList__________",audioList)
-                // console.info(audioList)
-
+                console.log(res);   
             }
-        });
+        })
 
-        function downfil(name,url) {
-            //下载
-            wx.downloadFile({
-                url: url,
-                success: function (res) {
-                    //保存
-                    wx.saveFile({
-                        tempFilePath: res.tempFilePath,
-                        success: function (res) {
-                            //记录
-                            var oldData = wx.getStorageSync('audioPathList') || {};
-                            oldData[name] = res.savedFilePath;
-                            console.log(res.savedFilePath)
-                            wx.setStorage({
-                                key: 'audioPathList',
-                                data: oldData,
-                            })
-                            //替换播放地址；
-                            replaceUrl(name,res.savedFilePath);
-                            // console.log("_______download audioList_______+"+audioList)
-                        }
-                    })
-                }
-            })
+        for (variable in object) {
+            // statement
         }
 
-        //替换播放地址；
-        var replaceUrl = function (name,path) {
-            return;
-            audioList[name] = path;
-            if ( name == Object.keys(audioList)[0] ) {
-                _that.setData({
-                    audioSrc: audioList[Object.keys(audioList)[0]],
+        //下载音乐保存本地；
+        wx.downloadFile({
+            url: audioUrls[index],
+            success: function (res) {
+                //保存
+                wx.saveFile({
+                    tempFilePath: res.tempFilePath,
+                    success: function (res) {
+                        //记录
+                        var oldData = wx.getStorageSync('audioData') || {};
+                        oldData[Object.keys(audioList)[index]] = res.savedFilePath;
+                        wx.setStorage({
+                            key: 'audioData',
+                            data: oldData,
+                        })
+                    }
                 })
             }
-        }
+        })
     },
 
     swiperChange: function(e) {
@@ -157,7 +106,7 @@ Page({
         if ( playing ) {
             return;
         }
-        // this.audioCtx.pause();
+        this.audioCtx.pause();
         playing = false;
         clearInterval(intervalTimers);
         this.setData({
@@ -169,9 +118,6 @@ Page({
             btnBegin: {
                 cls: '',
                 val: '开始'
-            },
-            audioAction: {
-                method: 'pause',
             },
         });
     },
@@ -220,11 +166,15 @@ Page({
 
         if ( playing ) {
             clearInterval(intervalTimers);
+            _that.audioCtx.pause();
             playing = false;
             var titleMin = meditationTime - _that.data.countTime.min - 1,
                 titleSec = 60 -  _that.data.countTime.sec;
+                console.log(111);
             _that.setData({
                 swipeAnswer: '',
+
+                noteStyle: 'display:block',
                 noteStyle: noteStyle,
                 btnBegin: {
                     cls: '',
@@ -250,6 +200,7 @@ Page({
             return;
         }
 
+        _that.audioCtx.play();
         _that.setData({
             swipeAnswer: 'false',
             btnBegin: {
@@ -264,14 +215,17 @@ Page({
             audioStyle: {
                 cls: 'top',
                 val: _that.data.audioStyle.val
-            },
-            audioAction: {
-                method: 'play',
-            },
+            }
         })
         playing = true;
         //开始倒计时
         _that.timeUpdate();
+    },
+
+    goInfoPage: function () {
+      wx.navigateTo({
+        url: '../logs/logs'
+      })
     },
 
     bindTextAreaBlur: function (e) {
@@ -302,7 +256,7 @@ Page({
             if ( parseInt(min) === 0 && parseInt(sec) === 0 ) {
                 clearInterval(intervalTimers);
                 _that.setData({
-                    noteStyle: 'block'
+                    noteStyle: 'display:block'
                 })
             }
         },1000)
@@ -310,43 +264,28 @@ Page({
 
     saveNote: function () {
         var _that = this;
-        var saveDate = new Date().getTime();
-
-        _that.setData({
-            noteStyle: '',
-            btnBegin: {
-                cls: '',
-                val: '开始'
-            },
-            audioStyle: {
-                cls: '',
-                val: _that.data.audioStyle.val
-            },
-        });
-
         setTimeout(function () {
             console.log( 'saveNote + ' + _that.data.areaVal );
             meditationDate = [{
-                date: saveDate,
+                date: new Date().getTime(),
                 duration: _that.data.countTime.min,
                 text: _that.data.areaVal
             }];
             var oldData = wx.getStorageSync('meditationDate') || [];
             var newData = oldData.concat(meditationDate);
-            console.table(newData);
             wx.setStorage({
                 key: 'meditationDate',
-                data: newData,
+                data: newData
             })
             _that.setData({
-                areaVal: '',
-                countTime: {
-                    display: '',
-                    min: meditationTime,
-                    sec: '00'
+                noteStyle: 'display:none',
+                btnBegin: {
+                    cls: '',
+                    val: '开始'
                 },
+                areaVal: '',
             });
-        },800)
+        },0)
     },
 
     // btnCancelNote: function () {
