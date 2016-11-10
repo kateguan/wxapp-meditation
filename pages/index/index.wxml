@@ -23,7 +23,7 @@
 
     <view class="thinkNote-wrap {{noteStyle}}">
         <view class="thinkNote-contant">
-            <text class="title">今日专注{{countTime.min}}分{{countTime.sec}}秒</text>
+            <text class="title">今日专注{{noteTitle.min}}分<block wx:if="{{noteTitle.sec != 0}}">{{noteTitle.sec}}秒</block></text>
             <textarea bindblur="bindTextAreaBlur" value="{{areaVal}}" class="thinkNote" placeholder="有什么样的感想？" placeholder-style='color: #aaa;'></textarea>
 
             <view class="btn-save btn" bindtap="saveNote"> 保存 </view>

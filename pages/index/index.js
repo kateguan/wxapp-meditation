@@ -41,6 +41,10 @@ Page({
             min: meditationTime,
             sec: '00'
         },
+        noteTitle: {
+            min: '',
+            sec: ''
+        },
         btnBegin: {
             cls: '',
             val: '开始'
@@ -173,6 +177,8 @@ Page({
     },
 
     beginFun: function(e) {
+        var _that = this;
+        var noteStyle = 'block';
 
         // console.log(audioList[(Object.keys(audioList)[0])]);
         // wx.playBackgroundAudio({
@@ -207,20 +213,39 @@ Page({
         // })
         // return;
 
-        var _that = this;
+        //时间短于1min不保存
+        if ( (meditationTime - _that.data.countTime.min) < 2 ) {
+            noteStyle = '';
+        }
+
         if ( playing ) {
             clearInterval(intervalTimers);
             playing = false;
+            var titleMin = meditationTime - _that.data.countTime.min - 1,
+                titleSec = 60 -  _that.data.countTime.sec;
             _that.setData({
                 swipeAnswer: '',
-                noteStyle: 'block',
+                noteStyle: noteStyle,
                 btnBegin: {
                     cls: '',
                     val: '开始'
                 },
                 audioAction: {
                     method: 'pause',
-                }
+                },
+                countTime: {
+                    display: '',
+                    min: meditationTime,
+                    sec: '00'
+                },
+                noteTitle: {
+                    min: titleMin < 10 ? '0' + titleMin : titleMin,
+                    sec: titleSec < 10 ? '0' + titleSec : titleSec,
+                },
+                audioStyle: {
+                    cls: '',
+                    val: _that.data.audioStyle.val
+                },
             })
             return;
         }
@@ -246,7 +271,7 @@ Page({
         })
         playing = true;
         //开始倒计时
-        this.timeUpdate();
+        _that.timeUpdate();
     },
 
     bindTextAreaBlur: function (e) {
