@@ -37,6 +37,10 @@ Page({
             min: '10',
             sec: '00'
         },
+        noteTitle: {
+            min: '',
+            sec: ''
+        },
         btnBegin: {
             cls: '',
             val: '开始'
@@ -120,13 +124,77 @@ Page({
 
     beginFun: function(e) {
         var _that = this;
+        var noteStyle = 'block';
+
+        // console.log(audioList[(Object.keys(audioList)[0])]);
+        // wx.playBackgroundAudio({
+        //     dataUrl: audioList[(Object.keys(audioList)[0])],
+        //     title: '',
+        //     coverImgUrl: '',
+        //     success: function () {
+        //         console.log("success")
+        //     },
+        //     fail: function () {
+        //         console.log("fail")
+        //     },
+        //     complete: function () {
+        //         console.log("complete")
+        //     },
+        // })
+        // wx.onBackgroundAudioPlay(function () {
+        //     console.log('onBackgroundAudioPlay')
+        // })
+        // wx.onBackgroundAudioPause(function () {
+        //     console.log('wx.onBackgroundAudioPause')
+        // })
+        // wx.onBackgroundAudioStop(function () {
+        //     console.log('wx.onBackgroundAudioStop')
+        // })
+        // wx.playVoice({
+        //     // filePath: 'https://dn-working-noise.qbox.me/noise/min/JapaneseGarden.mp3',
+        //     filePath: audioList[(Object.keys(audioList)[0])],
+        //     complete: function () {
+        //         console.log(123123);
+        //     }
+        // })
+        // return;
+
+        //时间短于1min不保存
+        if ( (meditationTime - _that.data.countTime.min) < 2 ) {
+            noteStyle = '';
+        }
+
         if ( playing ) {
             clearInterval(intervalTimers);
             _that.audioCtx.pause();
             playing = false;
+            var titleMin = meditationTime - _that.data.countTime.min - 1,
+                titleSec = 60 -  _that.data.countTime.sec;
             _that.setData({
                 swipeAnswer: '',
+
                 noteStyle: 'display:block',
+                noteStyle: noteStyle,
+                btnBegin: {
+                    cls: '',
+                    val: '开始'
+                },
+                audioAction: {
+                    method: 'pause',
+                },
+                countTime: {
+                    display: '',
+                    min: meditationTime,
+                    sec: '00'
+                },
+                noteTitle: {
+                    min: titleMin < 10 ? '0' + titleMin : titleMin,
+                    sec: titleSec < 10 ? '0' + titleSec : titleSec,
+                },
+                audioStyle: {
+                    cls: '',
+                    val: _that.data.audioStyle.val
+                },
             })
             return;
         }
@@ -150,7 +218,7 @@ Page({
         })
         playing = true;
         //开始倒计时
-        this.timeUpdate();
+        _that.timeUpdate();
     },
 
     goInfoPage: function () {
