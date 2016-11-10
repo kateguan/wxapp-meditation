@@ -223,6 +223,7 @@ Page({
             playing = false;
             var titleMin = meditationTime - _that.data.countTime.min - 1,
                 titleSec = 60 -  _that.data.countTime.sec;
+                console.log(111);
             _that.setData({
                 swipeAnswer: '',
                 noteStyle: noteStyle,
