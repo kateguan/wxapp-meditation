@@ -297,11 +297,6 @@ Page({
                 cls: '',
                 val: _that.data.audioStyle.val
             },
-            countTime: {
-                display: '',
-                min: meditationTime,
-                sec: '00'
-            },
         });
 
         setTimeout(function () {
@@ -313,12 +308,18 @@ Page({
             }];
             var oldData = wx.getStorageSync('meditationDate') || [];
             var newData = oldData.concat(meditationDate);
+            console.table(newData);
             wx.setStorage({
                 key: 'meditationDate',
                 data: newData,
             })
             _that.setData({
                 areaVal: '',
+                countTime: {
+                    display: '',
+                    min: meditationTime,
+                    sec: '00'
+                },
             });
         },800)
     },
