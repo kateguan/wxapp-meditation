@@ -78,8 +78,6 @@ page{
     opacity: 0;
     /*transition: 1s;*/
 }
-<<<<<<< HEAD
-=======
 .thinkNote-wrap.block{
     display: block;
     opacity: 1;
@@ -99,7 +97,6 @@ page{
         opacity: 1;
     }
 }
->>>>>>> 4b80a42eb48c9b62fd1502de195ca60c68c9f939
 .thinkNote-wrap .thinkNote-contant{
     position: absolute;
     top: 400rpx;
@@ -168,10 +165,7 @@ page{
     font-size: 40rpx;
     color: #fff;
     z-index: 2;
-<<<<<<< HEAD
-=======
     transition: .7s;
->>>>>>> 4b80a42eb48c9b62fd1502de195ca60c68c9f939
 }
 .btn-wrap .btn-begin.active{
     animation: btnBegin 1s .1s;
@@ -179,14 +173,9 @@ page{
 }
 @keyframes btnBegin{
     0% {
-<<<<<<< HEAD
         width: 160rpx;
         height: 160rpx;
         font-size: 30rpx;
-=======
-        width: 150rpx;
-        height: 150rpx;
->>>>>>> 4b80a42eb48c9b62fd1502de195ca60c68c9f939
     }
     10% {
         width: 150rpx;

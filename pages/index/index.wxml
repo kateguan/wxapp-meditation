@@ -21,13 +21,9 @@
 
     <view class="thinkNote-wrap" style="{{noteStyle}}">
         <view class="thinkNote-contant">
-<<<<<<< HEAD
-            <text class="title">冥想笔记</text>
-            <textarea bindblur="bindTextAreaBlur" value="{{areaVal}}" class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;'></textarea>
-=======
+
             <text class="title">今日专注{{noteTitle.min}}分<block wx:if="{{noteTitle.sec != 0}}">{{noteTitle.sec}}秒</block></text>
             <textarea bindblur="bindTextAreaBlur" value="{{areaVal}}" class="thinkNote" placeholder="有什么样的感想？" placeholder-style='color: #aaa;'></textarea>
->>>>>>> 4b80a42eb48c9b62fd1502de195ca60c68c9f939
 
             <button class="btn-save btn" bindtap="saveNote"> 保存 </button>
 
