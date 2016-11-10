@@ -1,6 +1,80 @@
 <!--logs.wxml-->
-<view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
+<view class="container">
+  <!--<block wx:for="{{logs}}" wx:for-item="log">
+
+  </block>-->
+  <view class="log-box">
+
+    <view class="userInfo" style="background-image: url({{userInfo.avatarUrl}});"></view>
+    <!--<view class="line"></view>-->
+    <view class="log-list">
+      <block wx:for="{{judgeDate}}">
+
+        <!--无信息-->
+        <block wx:if="{{!item.dateFlag}}">
+
+          <view class="line"></view>
+          <view wx:if="{{item.newText}}" class="content-box">
+            <view class="date-time">{{item.newDate}} 专注{{item.newDuration}}分钟</view>
+            <view class="text">{{item.newText}}</view>
+          </view>
+
+          <view wx:else if="{{!item.newText}}" class="content-box notext">
+            <view class="date-time">{{item.newDate}} 专注{{item.newDuration}}分钟</view>
+          </view>
+          <view class="line"></view>
+          <view class="busy">
+            <view class="text">忙</view>
+          </view>
+        </block>
+
+
+        <!--有信息-->
+        <block wx:if="{{item.dateFlag}}">
+          <view class="line"></view>
+          <view wx:if="{{item.newText}}" class="content-box">
+              <view class="date-time">{{item.newDate}} 专注{{item.newDuration}}分钟</view>
+              <view class="text">{{item.newText}}</view>
+            </view>
+
+            <view wx:else if="{{!item.newText}}" class="content-box notext">
+              <view class="date-time">{{item.newDate}} 专注{{item.newDuration}}分钟</view>
+            </view>
+        </block>
+
+
+
+        <!--第一天-->
+        <block wx:if="{{item.firstDay}}">
+          <view class="line"></view>
+          <view class="content-box notext">
+            <view class="date-time">{{item.newDate}} 开始慢慢</view>
+          </view>
+        </block>
+      </block>
+
+
+
+
+
+      <!--<view class="content-box">
+          <view class="date-time">2016.1.1 专注20分钟</view>
+        <view class="text">还是每天让自己静静地比较好</view>
+      </view>
+      <view class="line"></view>
+
+      <view class="content-box notext">
+        <view class="date-time">2016.1.1 专注20分钟</view>
+
+      </view>
+      <view class="line"></view>
+      <view class="busy">
+        <view class="text">忙</view>
+      </view>-->
+
+    </view>
+
+
+  </view>
+
 </view>
