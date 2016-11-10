@@ -155,7 +155,7 @@ Page({
 
             wx.setStorage({
                 key: 'meditationDate',
-                data: newData,
+                data: newData
             })
 
             that.setData({

@@ -1,6 +1,50 @@
 <!--logs.wxml-->
-<view class="container log-list">
-  <block wx:for="{{logs}}" wx:for-item="log">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
+<view class="container">
+  <!--<block wx:for="{{logs}}" wx:for-item="log">
+
+  </block>-->
+  <view class="log-box">
+
+    <view class="userInfo" style="background-image: url({{userInfo.avatarUrl}});"></view>
+    <view class="line"></view>
+    <view class="log-list">
+      <block wx:for="{{judgeDate}}">
+        <block wx:if="{{item.dateFlag}}">
+          <block wx:for="{{history}}">
+            <view wx:if="{{item.text}}" class="content-box">
+              <view class="date-time">{{judgeDate.date}}专注{{item.duration}}分钟</view>
+              <view class="text">{{item.text}}</view>
+            </view>
+            <view wx:else if="{{!item.text}}" class="content-box notext">
+              <view class="date-time">{{item.date}}专注{{item.duration}}分钟</view>
+            </view>
+            <view class="line"></view>
+          </block>
+        </block>
+      </block>
+
+
+
+
+
+      <!--<view class="content-box">
+          <view class="date-time">2016.1.1 专注20分钟</view>
+        <view class="text">还是每天让自己静静地比较好</view>
+      </view>
+      <view class="line"></view>
+
+      <view class="content-box notext">
+        <view class="date-time">2016.1.1 专注20分钟</view>
+
+      </view>
+      <view class="line"></view>
+      <view class="busy">
+        <view class="text">忙</view>
+      </view>-->
+
+    </view>
+
+
+  </view>
+
 </view>
