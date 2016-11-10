@@ -1,9 +1,11 @@
 <!--index.wxml-->
 <view class="container" bingtap="pullReturn">
     <swiper class="swiper {{swipeAnswer}}" duration="{{duration}}" bindchange="swiperChange">
-        <swiper-item wx:for="{{imgUrls}}" wx:key="*this">
-            <view class="slide-image" style='background-image: url({{item}});'></view>
-        </swiper-item>
+        <block  wx:for="{{imgUrls}}" wx:key="*this">
+            <swiper-item>
+                <view class="slide-image" style='background-image: url({{item}});'></view>
+            </swiper-item>
+        </block >
     </swiper>
     
     <view class="countdown-wrap">
@@ -19,12 +21,12 @@
         </view>
     </view>
 
-    <view class="thinkNote-wrap" style="{{noteStyle}}">
+    <view class="thinkNote-wrap {{noteStyle}}">
         <view class="thinkNote-contant">
-            <text class="title">冥想笔记</text>
-            <textarea bindblur="bindTextAreaBlur" value="{{vv}}" class="thinkNote" placeholder="写点感受吧！" placeholder-style='color: #aaa;'></textarea>
+            <text class="title">今日专注{{countTime.min}}分{{countTime.sec}}秒</text>
+            <textarea bindblur="bindTextAreaBlur" value="{{areaVal}}" class="thinkNote" placeholder="有什么样的感想？" placeholder-style='color: #aaa;'></textarea>
 
-            <button class="btn-save btn" bindtap="saveNote"> 保存 </button>
+            <view class="btn-save btn" bindtap="saveNote"> 保存 </view>
 
             <icon class="btn-cancel" type="clear" size="25" bindtap="btnCancelNote"></icon>
         </view>
@@ -43,5 +45,5 @@
     <view bindtap="goInfoPage" class="userinfo" style="background-image: url({{userInfo.avatarUrl}});">
     </view>
 
-    <audio id="myAudio" src="{{audioSrc}}" loop="loop"></audio>
+    <audio id="myAudio" src="{{audioSrc}}" action="{{audioAction}}" loop="loop"></audio>
 </view>
